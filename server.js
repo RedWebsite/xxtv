@@ -21,16 +21,12 @@ const PORT = process.env.PORT || 3000;
 const DATA_FILE = path.join(process.cwd(), 'db.json');
 const TEMPLATE_FILE = path.join(process.cwd(), 'db.template.json');
 
-// ⚠️ 关键修复：Vercel 只允许写入 /tmp 目录
+// 自动识别环境并切换到可写目录
 const IS_VERCEL = !!process.env.VERCEL;
-const VERCEL_TMP = '/tmp';
-const IMAGE_CACHE_DIR = path.join(VERCEL_TMP, 'images');
+const CACHE_DIR = IS_VERCEL ? '/tmp' : __dirname;
 
-// 缓存文件路径重定向
-const SEARCH_CACHE_JSON = path.join(VERCEL_TMP, 'cache_search.json');
-const DETAIL_CACHE_JSON = path.join(VERCEL_TMP, 'cache_detail.json');
-const CACHE_DB_FILE = path.join(VERCEL_TMP, 'cache.db');
-
+const SEARCH_CACHE_JSON = path.join(CACHE_DIR, 'cache_search.json');
+const DETAIL_CACHE_JSON = path.join(CACHE_DIR, 'cache_detail.json');
 // 初始化目录
 if (!fs.existsSync(IMAGE_CACHE_DIR)) {
     try { fs.mkdirSync(IMAGE_CACHE_DIR, { recursive: true }); } catch(e){}
