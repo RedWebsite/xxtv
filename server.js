@@ -20,7 +20,7 @@ const DATA_FILE = path.join(__dirname, 'db.json');
 const TEMPLATE_FILE = path.join(__dirname, 'db.template.json');
 
 // 图片缓存目录
-const IMAGE_CACHE_DIR = path.join(__dirname, 'public/cache/images');
+const IMAGE_CACHE_DIR = path.join('/tmp', 'images');
 if (!fs.existsSync(IMAGE_CACHE_DIR)) {
     fs.mkdirSync(IMAGE_CACHE_DIR, { recursive: true });
 }
